@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="egovframework.board.service.impl.BoardMapper">
+	<!--
+		* INSTR() 함수 대신 LIKE 를 사용하는 경우
+		  subject LIKE '%' || #{kwd} || '%'
+		* CLOB인 경우 검색(LIKE 사용하지 말것)
+		  DBMS_LOB.INSTR(content, #{kwd}) &gt; 0 
+	-->	
+	<sql id="where-list">
+		<choose>
+			<when test="schType == 'all'">
+				( INSTR(subject, #{kwd}) &gt; 0
+			    	OR INSTR(content, #{kwd}) &gt; 0 )
+			</when>
+			<when test="schType == 'reg_date'">
+				( TO_CHAR(reg_date, 'YYYY-MM-DD') = #{kwd}
+			    	OR TO_CHAR(reg_date, 'YYYYMMDD') = #{kwd} )
+			</when>
+			<otherwise>
+				INSTR(${schType}, #{kwd}) &gt; 0
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<!-- 글 개수 -->
+	<select id="dataCount" parameterType="map" resultType="Integer">
+		SELECT NVL(COUNT(num), 0)
+		FROM bbs
+		<where>
+			<if test="kwd != null and kwd != '' ">
+				<include refid="where-list"/>
+			</if>
+		</where>
+	</select>
+
+	<!-- 글 목록 -->
+	<select id="listBoard" parameterType="map" resultType="egovframework.board.service.BoardDTO">
+		SELECT num, name, subject, hitCount, TO_CHAR(reg_date, 'yyyy-mm-dd') as reg_date
+		FROM bbs
+		<where>
+			<if test="kwd != null and kwd != ''">
+				<include refid="where-list"/>
+			</if>
+		</where>
+		ORDER BY num DESC
+		OFFSET #{offset} ROWS FETCH FIRST #{size} ROWS ONLY
+	</select>
+
+</mapper>

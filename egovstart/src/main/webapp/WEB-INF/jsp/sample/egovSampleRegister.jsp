@@ -27,23 +27,23 @@
     <title>Sample <c:if test="${registerFlag == 'create'}"><spring:message code="button.create" /></c:if>
                   <c:if test="${registerFlag == 'modify'}"><spring:message code="button.modify" /></c:if>
     </title>
-    <link type="text/css" rel="stylesheet" href="<c:url value='/css/egovframework/sample.css'/>"/>
+    <link type="text/css" rel="stylesheet" href="<c:url value='/resources/css/egovframework/sample.css'/>"/>
     
     <!--For Commons Validator Client Side-->
-    <script type="text/javascript" src="<c:url value='/cmmn/validator.do'/>"></script>
+    <script type="text/javascript" src="<c:url value='/cmmn/validator'/>"></script>
     <validator:javascript formName="sampleVO" staticJavascript="false" xhtml="true" cdata="false"/>
     
     <script type="text/javaScript" language="javascript" defer="defer">
         <!--
         /* 글 목록 화면 function */
         function fn_egov_selectList() {
-           	document.detailForm.action = "<c:url value='/egovSampleList.do'/>";
+           	document.detailForm.action = "<c:url value='/egovSampleList'/>";
            	document.detailForm.submit();
         }
         
         /* 글 삭제 function */
         function fn_egov_delete() {
-           	document.detailForm.action = "<c:url value='/deleteSample.do'/>";
+           	document.detailForm.action = "<c:url value='/deleteSample'/>";
            	document.detailForm.submit();
         }
         
@@ -53,7 +53,7 @@
         	if(!validateSampleVO(frm)){
                 return;
             }else{
-            	frm.action = "<c:url value="${registerFlag == 'create' ? '/addSample.do' : '/updateSample.do'}"/>";
+            	frm.action = "<c:url value="${registerFlag == 'create' ? '/addSample' : '/updateSample'}"/>";
                 frm.submit();
             }
         }
@@ -68,7 +68,7 @@
     	<!-- 타이틀 -->
     	<div id="title">
     		<ul>
-    			<li><img src="<c:url value='/images/egovframework/example/title_dot.gif'/>" alt=""/>
+    			<li><img src="<c:url value='/resources/images/egovframework/example/title_dot.gif'/>" alt=""/>
                     <c:if test="${registerFlag == 'create'}"><spring:message code="button.create" /></c:if>
                     <c:if test="${registerFlag == 'modify'}"><spring:message code="button.modify" /></c:if>
                 </li>
@@ -130,7 +130,7 @@
     			<li>
                     <span class="btn_blue_l">
                         <a href="javascript:fn_egov_selectList();"><spring:message code="button.list" /></a>
-                        <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
+                        <img src="<c:url value='/resources/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                     </span>
                 </li>
     			<li>
@@ -139,21 +139,21 @@
                             <c:if test="${registerFlag == 'create'}"><spring:message code="button.create" /></c:if>
                             <c:if test="${registerFlag == 'modify'}"><spring:message code="button.modify" /></c:if>
                         </a>
-                        <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
+                        <img src="<c:url value='/resources/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                     </span>
                 </li>
     			<c:if test="${registerFlag == 'modify'}">
                     <li>
                         <span class="btn_blue_l">
                             <a href="javascript:fn_egov_delete();"><spring:message code="button.delete" /></a>
-                            <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
+                            <img src="<c:url value='/resources/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                         </span>
                     </li>
     			</c:if>
     			<li>
                     <span class="btn_blue_l">
                         <a href="javascript:document.detailForm.reset();"><spring:message code="button.reset" /></a>
-                        <img src="<c:url value='/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
+                        <img src="<c:url value='/resources/images/egovframework/example/btn_bg_r.gif'/>" style="margin-left:6px;" alt=""/>
                     </span>
                 </li>
             </ul>

@@ -12,6 +12,8 @@
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
     </context:component-scan>
+    
+    <mvc:resources mapping="/resources/**" location="/resources/" />
 
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="webBindingInitializer">
@@ -46,7 +48,8 @@
 
     <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver" p:order="1"
 	    p:viewClass="org.springframework.web.servlet.view.JstlView"
-	    p:prefix="/WEB-INF/jsp/egovframework/example/" p:suffix=".jsp"/>
+	    p:prefix="/WEB-INF/jsp/" p:suffix=".jsp"/>
+
 
     <!-- For Pagination Tag -->
     <bean id="imageRenderer" class="egovframework.example.cmmn.web.EgovImgPaginationRenderer"/>
@@ -60,5 +63,5 @@
     </bean>
 	<!-- /For Pagination Tag -->
 
-    <mvc:view-controller path="/cmmn/validator.do" view-name="cmmn/validator"/>
+    <mvc:view-controller path="/cmmn/validator" view-name="cmmn/validator"/>
 </beans>

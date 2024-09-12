@@ -70,7 +70,8 @@
 				</choose>
 			</if>
 			ORDER BY ID DESC
-			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+			OFFSET #{firstIndex} ROWS
+			FETCH NEXT #{recordCountPerPage} ROWS ONLY
 	</select>
 
 	<select id="selectSampleListTotCnt" parameterType="searchVO" resultType="int">
