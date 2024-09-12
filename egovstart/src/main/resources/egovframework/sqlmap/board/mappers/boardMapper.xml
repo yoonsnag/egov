@@ -8,6 +8,7 @@
 		* CLOB인 경우 검색(LIKE 사용하지 말것)
 		  DBMS_LOB.INSTR(content, #{kwd}) &gt; 0 
 	-->	
+	
 	<sql id="where-list">
 		<choose>
 			<when test="schType == 'all'">
